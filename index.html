@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FENG NAN — Visual Artist & Digital Architect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Inter:wght@200;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #ffffff;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-main: 'Inter', sans-serif;
+            --pad: clamp(24px, 8vw, 140px);
+            --transition-page: 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        body.light-mode {
+            --bg: #f5f5f3;
+            --text: #0a0a0a;
+            --border: rgba(0, 0, 0, 0.1);
+            --accent: #0a0a0a;
+        }
+
+        /* 强制隐藏系统光标并确保交互响应 */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+        html { scroll-behavior: smooth; }
+
+        body { 
+            background: var(--bg); color: var(--text); 
+            font-family: var(--font-main); overflow-x: hidden; 
+            transition: background 0.8s var(--transition-page);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- 噪点质感 --- */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='n'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23n)'/%3E%3F/svg%3E");
+            opacity: 0.04; pointer-events: none; z-index: 1000;
+        }
+
+        /* --- 极简小白点游标 (性能最高级) --- */
+        #cursor {
+            position: fixed; 
+            width: 8px; 
+            height: 8px; 
+            background: var(--text);
+            border-radius: 50%; 
+            pointer-events: none; 
+            z-index: 9999;
+            mix-blend-mode: difference; 
+            transform: translate(-50%, -50%);
+            /* 彻底移除 transition 动画，实现物理级别同步，消除任何卡顿感 */
+            transition: none; 
+            will-change: left, top;
+            backface-visibility: hidden;
+        }
+
+        /* --- 导航 --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 32px var(--pad);
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
+            border-bottom: 1px solid var(--border); background: var(--bg);
+        }
+        .logo { font-family: var(--font-display); font-size: 24px; font-weight: 300; letter-spacing: 3px; }
+        .nav-right { display: flex; align-items: center; gap: 40px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text); font-size: 10px; 
+            text-transform: uppercase; letter-spacing: 2.5px; opacity: 0.5; transition: 0.3s;
+        }
+        .nav-links a:hover { opacity: 1; }
+        .btn-toggle {
+            background: none; border: 1px solid var(--border); color: var(--text);
+            padding: 7px 16px; border-radius: 2px; font-size: 9px; text-transform: uppercase;
+        }
+
+        /* --- Hero Section --- */
+        .hero { 
+            height: 100vh; display: flex; align-items: center; 
+            padding: 0 var(--pad); border-bottom: 1px solid var(--border);
+        }
+        .hero-inner { width: 100%; }
+
+        /* 中文模式布局 */
+        .hero.zh-layout .hero-inner {
+            display: grid; grid-template-columns: 1.2fr 1fr; align-items: end; gap: 60px;
+        }
+        .hero.zh-layout .hero-meta { 
+            border-left: 1px solid var(--border); padding-left: 40px; text-align: left; 
+        }
+
+        /* 英文模式布局 */
+        .hero.en-layout .hero-inner {
+            height: 55vh; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .hero.en-layout .hero-title { align-self: flex-start; text-align: left; }
+        .hero.en-layout .hero-meta { 
+            align-self: flex-end; text-align: right; 
+            border-right: 1px solid var(--border); padding-right: 40px; 
+        }
+
+        .hero-title { 
+            font-family: var(--font-display); font-size: clamp(3rem, 10vw, 10rem);
+            font-weight: 300; line-height: 0.85; text-transform: uppercase; letter-spacing: -2px;
+        }
+        .hero-title span { display: block; }
+        .hero-title .italic { font-style: italic; padding-left: 10%; opacity: 0.8; }
+        
+        .meta-label { font-size: 9px; opacity: 0.4; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 20px; }
+        .meta-text { font-size: 14px; line-height: 1.8; max-width: 360px; font-weight: 200; opacity: 0.8; }
+
+        /* --- Philosophy --- */
+        .philosophy { padding: 180px var(--pad); display: flex; justify-content: center; border-bottom: 1px solid var(--border); }
+        .philosophy-text { 
+            font-family: var(--font-display); font-size: clamp(1.6rem, 3.5vw, 3rem); 
+            text-align: center; max-width: 1100px; line-height: 1.35; font-weight: 300;
+        }
+        .philosophy-text em { font-weight: 600; font-style: italic; }
+
+        /* --- Works Grid --- */
+        .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+        .work-item { 
+            border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            padding: 100px var(--pad); transition: background 0.6s var(--transition-page);
+        }
+        .work-item:nth-child(2n) { border-right: none; }
+        .work-item:hover { background: rgba(255,255,255,0.02); }
+
+        .work-img-wrap { width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #050505; margin-bottom: 40px; }
+        .work-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 1.5s var(--transition-page); }
+        .work-item:hover img { transform: scale(1.03); filter: grayscale(0); }
+        
+        .work-info { display: flex; justify-content: space-between; align-items: baseline; }
+        .work-category { font-size: 9px; opacity: 0.4; text-transform: uppercase; letter-spacing: 3px; }
+        .work-title { font-family: var(--font-display); font-size: 24px; font-weight: 300; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- Experience --- */
+        .experience { border-bottom: 1px solid var(--border); }
+        .exp-row { 
+            display: grid; grid-template-columns: 1.2fr 2fr 1.5fr; 
+            padding: 80px var(--pad); border-bottom: 1px solid var(--border);
+            transition: background 0.4s;
+        }
+        .exp-row:last-child { border-bottom: none; }
+        .exp-row:hover { background: rgba(255,255,255,0.04); }
+        .exp-year { font-size: 11px; opacity: 0.3; letter-spacing: 2px; }
+        .exp-role { font-size: 18px; font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
+        .exp-company { font-family: var(--font-display); font-size: 22px; font-style: italic; text-align: right; opacity: 0.7; }
+
+        /* --- Contact --- */
+        .contact { padding: 180px var(--pad); text-align: center; }
+        .contact-h { font-family: var(--font-display); font-size: clamp(3rem, 11vw, 13rem); font-weight: 300; text-transform: uppercase; margin-bottom: 60px; letter-spacing: -2px; }
+        .contact-hint { font-size: 10px; text-transform: uppercase; letter-spacing: 4px; opacity: 0.4; margin-bottom: 40px; display: block; font-weight: 400; }
+        
+        .contact-links { 
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+        }
+        .contact-link-item { 
+            padding: 80px 0; border-right: 1px solid var(--border); text-decoration: none; color: var(--text);
+            transition: 0.4s var(--transition-page); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .contact-link-item:last-child { border-right: none; }
+        .contact-link-item:hover { background: var(--text); color: var(--bg); }
+        
+        .c-label { font-size: 9px; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 12px; opacity: 0.4; }
+        .c-value { font-size: 15px; font-weight: 400; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .c-arrow { font-size: 12px; opacity: 0; transform: translate(-5px, 5px); transition: 0.2s ease; }
+        .contact-link-item:hover .c-arrow { opacity: 1; transform: translate(0, 0); }
+
+        @media (max-width: 1024px) {
+            .hero.zh-layout .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 120px; height: auto; padding-bottom: 80px; }
+            .hero-inner, .hero.en-layout .hero-inner, .hero.zh-layout .hero-inner { display: flex; flex-direction: column; height: auto; gap: 40px; text-align: center; }
+            .hero-title .italic { padding-left: 0; }
+            .hero-meta, .hero.en-layout .hero-meta, .hero.zh-layout .hero-meta { align-self: center; text-align: center; border: none; border-top: 1px solid var(--border); padding: 40px 0 0 0; }
+            .works-grid { grid-template-columns: 1fr; }
+            .work-item { padding: 60px 24px; border-right: none; }
+            .exp-row { grid-template-columns: 1fr; gap: 15px; padding: 40px 24px; }
+            .exp-company { text-align: left; font-size: 18px; }
+            .contact-links { grid-template-columns: 1fr; }
+            .contact-link-item { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 0; }
+            #cursor { display: none; }
+        }
+    </style>
+</head>
+<body class="zh-mode"> 
+
+    <div id="cursor"></div>
+
+    <nav>
+        <div class="logo">F.N VISION</div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#work" data-en="Works" data-zh="作品集">作品集</a>
+                <a href="#about" data-en="Milestones" data-zh="履历">履历</a>
+                <a href="#contact" data-en="Contact" data-zh="联系">联系</a>
+            </div>
+            <div class="toggle-group" style="display: flex; gap: 12px;">
+                <button class="btn-toggle" id="lang-btn">EN</button>
+                <button class="btn-toggle" id="theme-btn">Light</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slide 1: Hero (默认中文布局) -->
+    <section class="hero zh-layout" id="hero-section">
+        <div class="hero-inner">
+            <h1 class="hero-title">
+                <span data-en="VISUAL" data-zh="视觉">视觉</span>
+                <span class="italic" data-en="ARTIST" data-zh="艺术家">艺术家</span>
+            </h1>
+            <div class="hero-meta">
+                <span class="meta-label">Selected Works / 2026</span>
+                <p class="meta-text" data-en="Exploring the intersection of Vibe Coding and high-end 3D visual storytelling. Minimalist by choice, complex by nature." data-zh="探索氛围编程与高端 3D 视觉叙事的交界。选择极简，生而复杂。">
+                    探索氛围编程与高端 3D 视觉叙事的交界。选择极简，生而复杂。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: Philosophy -->
+    <section class="philosophy">
+        <div class="philosophy-text" data-en="Experience is the soul of design, <em>Vision</em> is its coat." data-zh="体验是设计的灵魂，视觉是它的<em>外衣</em>。">
+            体验是设计的灵魂，视觉是它的<em>外衣</em>。
+        </div>
+    </section>
+
+    <!-- Slide 3: Works -->
+    <section class="works-grid" id="work">
+        <div class="work-item">
+            <div class="work-img-wrap"><img src="https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&q=80&w=1200" alt="Work"></div>
+            <div class="work-info">
+                <h3 class="work-title">NEON GENESIS</h3>
+                <span class="work-category">3D Motion</span>
+            </div>
+        </div>
+        <div class="work-item">
+            <div class="work-img-wrap"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200" alt="Work"></div>
+            <div class="work-info">
+                <h3 class="work-title">TYPO GRAVITY</h3>
+                <span class="work-category">Graphic Design</span>
+            </div>
+        </div>
+        <div class="work-item">
+            <div class="work-img-wrap"><img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200" alt="Work"></div>
+            <div class="work-info">
+                <h3 class="work-title">LIQUID LOGIC</h3>
+                <span class="work-category">Vibe Coding</span>
+            </div>
+        </div>
+        <div class="work-item">
+            <div class="work-img-wrap"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200" alt="Work"></div>
+            <div class="work-info">
+                <h3 class="work-title">SYNTHETIC LIFE</h3>
+                <span class="work-category">Experimental</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Experience -->
+    <section class="experience" id="about">
+        <div class="exp-row">
+            <span class="exp-year">2024 — PRESENT</span>
+            <span class="exp-role" data-en="Creative Director" data-zh="独立创意总监">独立创意总监</span>
+            <span class="exp-company">@FENGNAN_VISION</span>
+        </div>
+        <div class="exp-row">
+            <span class="exp-year">2021 — 2023</span>
+            <span class="exp-role" data-en="Senior 3D Visualizer" data-zh="资深 3D 视觉专家">资深 3D 视觉专家</span>
+            <span class="exp-company" data-en="Liquid Motion Lab" data-zh="流体动效实验室">流体动效实验室</span>
+        </div>
+        <div class="exp-row">
+            <span class="exp-year">2018 — 2020</span>
+            <span class="exp-role" data-en="Visual Designer" data-zh="视觉设计师">视觉设计师</span>
+            <span class="exp-company" data-en="Aesthetic Craft" data-zh="美学手作工作室">美学手作工作室</span>
+        </div>
+    </section>
+
+    <!-- Slide 5: Contact -->
+    <section class="contact" id="contact">
+        <h2 class="contact-h" data-en="INQUIRIES" data-zh="联络">联络</h2>
+        <span class="contact-hint" data-en="CLICK TO DIRECT" data-zh="点击可直达">点击可直达</span>
+        <div class="contact-links">
+            <a href="mailto:1115914765@qq.com" class="contact-link-item">
+                <span class="c-label">Mail</span>
+                <span class="c-value">1115914765@qq.com <span class="c-arrow">&#8599;</span></span>
+            </a>
+            <a href="https://space.bilibili.com/430797768" target="_blank" class="contact-link-item">
+                <span class="c-label">Bilibili</span>
+                <span class="c-value">@风男视觉 <span class="c-arrow">&#8599;</span></span>
+            </a>
+            <a href="https://www.zcool.com.cn/u/17233702" target="_blank" class="contact-link-item">
+                <span class="c-label">Zcool</span>
+                <span class="c-value" data-en="Zcool Page" data-zh="站酷主页">站酷主页 <span class="c-arrow">&#8599;</span></span>
+            </a>
+            <a href="#" class="contact-link-item">
+                <span class="c-label">WeChat</span>
+                <span class="c-value" data-en="Official" data-zh="公众号：风男视觉">公众号：风男视觉 <span class="c-arrow">&#8599;</span></span>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // 1. 零延迟物理同步游标 (移除一切插值动画，实现绝对同步)
+        const cursor = document.getElementById('cursor');
+        window.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // 2. 语言切换与布局适配
+        const langBtn = document.getElementById('lang-btn');
+        const heroSection = document.getElementById('hero-section');
+        let currentLang = 'ZH'; // 默认设置为中文
+        
+        function toggleLang() {
+            currentLang = currentLang === 'ZH' ? 'EN' : 'ZH';
+            
+            // 切换文案
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const enTxt = el.getAttribute('data-en');
+                const zhTxt = el.getAttribute('data-zh');
+                el.innerHTML = currentLang === 'EN' ? enTxt : zhTxt;
+            });
+            
+            // 切换布局类
+            if (currentLang === 'EN') {
+                heroSection.classList.replace('zh-layout', 'en-layout');
+                langBtn.innerText = 'ZH';
+            } else {
+                heroSection.classList.replace('en-layout', 'zh-layout');
+                langBtn.innerText = 'EN';
+            }
+        }
+        langBtn.addEventListener('click', toggleLang);
+
+        // 3. 主题切换
+        const themeBtn = document.getElementById('theme-btn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            themeBtn.innerText = document.body.classList.contains('light-mode') ? 'Dark' : 'Light';
+        });
+
+        // 4. 入场动画
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section, .work-item, .exp-row').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = '1.2s var(--transition-page)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
