@@ -8,8 +8,8 @@ import {
 } from 'lucide-react';
 
 /**
- * 顶级 Antigravity Portfolio v3.2.1 (Linear / Apple HIG 质感)
- * 更新：替换联系邮箱为 1115914765@qq.com
+ * 顶级 Antigravity Portfolio v3.2 (Linear / Apple HIG 质感)
+ * 新增：全局 Light/Dark Mode 昼夜主题无缝切换
  */
 
 // --- 基础 UI 组件库 ---
@@ -622,7 +622,6 @@ export default function App() {
             <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] dark:shadow-[0_0_10px_rgba(255,255,255,0.8)]" /> 
             风男视觉
           </div>
-          {/* 更新后的邮箱链接和文字 */}
           <a href="mailto:1115914765@qq.com" className="font-mono text-[10px] tracking-widest text-black/60 dark:text-white/40 hover:text-[#0d0d0d] dark:hover:text-white transition-colors flex items-center gap-2 border border-black/10 dark:border-white/10 px-4 py-2 rounded-full bg-black/[0.02] dark:bg-white/[0.02]">
             <LucideMail size={12}/> 1115914765@qq.com
           </a>
