@@ -528,9 +528,9 @@ export default function App() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { t: 'C4D 场景源文件包', d: '多套完整 C4D 工程文件，覆盖科幻场景、自然地貌等风格。', s: '~280 MB', i: <LucideBox/>, link: 'https://space.bilibili.com/430797768' },
+            { t: 'C4D 场景源文件包', d: '多套完整 C4D 工程文件，覆盖科幻场景、自然地貌等风格。', s: '~1.6 GB', i: <LucideBox/>, link: 'https://space.bilibili.com/430797768' },
             { t: 'ComfyUI 工作流模板', d: '精心整理的工作流合集，文生图、局部重绘常用管线，开箱即用。', s: '~45 MB', i: <LucideCpu/>, link: 'https://gkqxmddvvj.feishu.cn/wiki/UH2WwjshxiLOV8kLQKgcdXRinP5' },
-            { t: 'Creative Lab 安装包', d: '最新版，集成三大引擎与AI配音，支持 Win / Mac。', s: '~1.2 GB', i: <LucideDownload/>, link: 'https://space.bilibili.com/430797768' },
+            { t: 'Creative Lab 安装包', d: '最新版，集成三大引擎与AI配音，支持 Win / Mac。', s: '~.exe', i: <LucideDownload/>, link: 'https://space.bilibili.com/430797768' },
             { t: 'AI 提示词合集', d: '实战验证的 Prompt 宝典，覆盖材质、光效等类别。', s: '~8 MB', i: <LucideImage/>, link: 'https://gkqxmddvvj.feishu.cn/wiki/UH2WwjshxiLOV8kLQKgcdXRinP5' },
             { t: '3D 设计系列教程', d: '系统化 3D 学习课程，视频讲解+配套工程文件。', s: 'Video', i: <LucideVideo/>, link: 'https://space.bilibili.com/430797768' },
             { t: 'HDR 光照贴图素材', d: '高质量 HDR 环境贴图，直接用于 C4D / UE5。', s: '~600 MB', i: <LucideSparkles/>, link: 'https://gkqxmddvvj.feishu.cn/wiki/UH2WwjshxiLOV8kLQKgcdXRinP5' }
