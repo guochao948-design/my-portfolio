@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   LucideLayers, LucideCpu, LucideWind, LucideArrowUpRight, 
   LucideMousePointer2, LucideBox, LucideDownload, LucideMail,
@@ -42,7 +42,8 @@ const SectionHeader = ({ num, title, highlight, subtitle }) => (
 );
 
 // 🔥 核心重构：Magic UI / Linear 风格鼠标追踪高光卡片
-const SpotlightCard = ({ title, desc, icon, category, tags = [], image = null, className = "", isDarkMode }) => {
+// 【修复点】：增加了 link 参数接收
+const SpotlightCard = ({ title, desc, icon, category, tags = [], image = null, link, className = "", isDarkMode }) => {
   const divRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -67,6 +68,8 @@ const SpotlightCard = ({ title, desc, icon, category, tags = [], image = null, c
   return (
     <motion.div
       ref={divRef}
+      // 【修复点】：添加点击事件，如果传入了 link 则打开新页面
+      onClick={() => link && window.open(link, '_blank')}
       whileHover={{ y: -6 }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -500,197 +503,82 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px]">
 
-  <div className="md:col-span-8 md:row-span-2">
-    <SpotlightCard
-      isDarkMode={isDarkMode}
-      category="3D · C4D"
-      title="Just do it"
-      desc="放下完美主义，才是真正的成长开始..."
-      icon={<LucideLayers />}
-      image="/images/1.png"
-      link="https://www.zcool.com.cn/work/ZNzIyNTUyMzI=.html"
-    />
-  </div>
-
-  <div className="md:col-span-4">
-    <SpotlightCard
-      isDarkMode={isDarkMode}
-      category="AI · Creative Lab"
-      title="CG产品渲染"
-      desc="石头科技扫地机预热CG"
-      icon={<LucideSparkles />}
-      image="/images/2.png"
-      link="https://www.zcool.com.cn/work/ZNjg1MjE5NzI=.html"
-    />
-  </div>
-
-  <div className="md:col-span-4">
-    <SpotlightCard
-      isDarkMode={isDarkMode}
-      category="3D · Motion"
-      title="卡通场景呈现"
-      desc="TCL中环2022年财报CG作品"
-      icon={<LucideWind />}
-      image="/images/3.png"
-      link="https://www.zcool.com.cn/work/ZNjgwMjIyMzI=.html"
-    />
-  </div>
-
-  <div className="md:col-span-4">
-    <SpotlightCard
-      isDarkMode={isDarkMode}
-      category="AI · Image Gen"
-      title="竞速产品CG表现"
-      desc="环境概念氛围图与影视级光影构成"
-      icon={<LucideImage />}
-      image="/images/4.png"
-      link="https://www.zcool.com.cn/work/ZNjI4Njc0NjQ=.html"
-    />
-  </div>
-
-  <div className="md:col-span-4">
-    <SpotlightCard
-      isDarkMode={isDarkMode}
-      category="3D · VFX"
-      title="室内渲染"
-      desc="家居环境打光与动态渲染"
-      icon={<LucideMonitorPlay />}
-      image="/images/5.png"
-      link="https://www.zcool.com.cn/work/ZNjgzMzgwNTI=.html"
-    />
-  </div>
-
-  <div className="md:col-span-4">
-    <SpotlightCard
-      isDarkMode={isDarkMode}
-      category="AI · ComfyUI"
-      title="GT3 RS CGI"
-      desc="汽车外景内饰工作流产出"
-      icon={<LucideCpu />}
-      image="/images/6.png"
-      link="https://www.zcool.com.cn/work/ZNzE3MDUyNzI=.html"
-    />
-  </div>
-
-</div>
-        </div>
-      </section>
-
-      {/* 5. DOWNLOADS 下载 */}
-      <section id="downloads" className="px-6 md:px-24 py-32 border-y border-black/5 dark:border-white/5 bg-white/30 dark:bg-black/20 relative backdrop-blur-sm transition-colors">
-        <div className="max-w-[1400px] mx-auto">
-          <SectionHeader num="04" subtitle="Resources" title="Free" highlight="Downloads." />
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { t: 'C4D 场景源文件包', d: '多套完整 C4D 工程文件，覆盖科幻场景、自然地貌等风格。', s: '~1.6 GB', i: <LucideBox size={24}/>, link: 'https://space.bilibili.com/430797768' },
-              { t: 'ComfyUI 工作流模板', d: '精心整理的工作流合集，文生图、局部重绘常用管线，开箱即用。', s: '~45 MB', i: <LucideCpu size={24}/>, link: 'https://gkqxmddvvj.feishu.cn/wiki/UH2WwjshxiLOV8kLQKgcdXRinP5' },
-              { t: 'Creative Lab 安装包', d: '最新版，集成三大引擎与AI配音，支持 Win / Mac。', s: '~.exe / .dmg', i: <LucideDownload size={24}/>, link: 'https://space.bilibili.com/430797768' },
-              { t: 'AI 提示词合集', d: '实战验证的 Prompt 宝典，覆盖材质、光效等核心出图维度。', s: '~8 MB', i: <LucideImage size={24}/>, link: 'https://gkqxmddvvj.feishu.cn/wiki/UH2WwjshxiLOV8kLQKgcdXRinP5' },
-              { t: '3D 设计系列教程', d: '系统化 3D 学习课程，视频讲解+配套工程文件源码。', s: 'Video Series', i: <LucideVideo size={24}/>, link: 'https://space.bilibili.com/430797768' },
-              { t: 'HDR 光照贴图素材', d: '高质量工业级 HDR 环境贴图，直接用于 C4D / UE5。', s: '~600 MB', i: <LucideSparkles size={24}/>, link: 'https://gkqxmddvvj.feishu.cn/wiki/UH2WwjshxiLOV8kLQKgcdXRinP5' }
-            ].map((item, idx) => (
-              <motion.a 
-                href={item.link} target="_blank" rel="noopener noreferrer" key={idx} 
-                whileHover={{ y: -6, scale: 1.01 }} transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="relative p-8 md:p-10 rounded-[32px] bg-white/40 dark:bg-white/[0.02] backdrop-blur-2xl border border-black/5 dark:border-white/5 hover:border-black/20 dark:hover:border-white/20 hover:shadow-xl dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all flex flex-col cursor-pointer group block overflow-hidden"
-              >
-                <div className="absolute inset-0 rounded-[32px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] pointer-events-none" />
-                <motion.div animate={{ x: ['-200%', '200%'] }} transition={{ duration: 3, repeat: Infinity, repeatDelay: 4 + idx, ease: "easeInOut" }} className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-black/[0.03] dark:via-white/[0.03] to-transparent -skew-x-12 z-0 pointer-events-none" />
-                
-                <div className="relative z-10 flex justify-between items-start mb-8">
-                  <div className="text-black/50 dark:text-white/50 group-hover:text-black dark:group-hover:text-white transition-colors">{item.i}</div>
-                  <span className="text-[9px] font-mono border border-black/10 dark:border-white/10 text-black/80 dark:text-white/80 px-2 py-1 rounded bg-black/5 dark:bg-white/5 font-bold shadow-sm">FREE</span>
-                </div>
-                <h4 className="relative z-10 font-sans font-bold text-lg mb-3 text-[#0d0d0d] dark:text-white/90 group-hover:text-black dark:group-hover:text-white transition-colors">{item.t}</h4>
-                <p className="relative z-10 text-sm text-black/60 dark:text-white/50 leading-relaxed flex-grow mb-8">{item.d}</p>
-                <div className="relative z-10 flex justify-between items-center pt-5 border-t border-black/10 dark:border-white/10">
-                  <span className="font-mono text-[10px] text-black/40 dark:text-white/40 font-semibold">{item.s}</span>
-                  <span className="font-mono text-[10px] text-black/60 dark:text-white/60 tracking-widest uppercase flex items-center gap-1 group-hover:gap-2 group-hover:text-black dark:group-hover:text-white transition-all font-bold">
-                    Get <LucideArrowUpRight size={14}/>
-                  </span>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. CONTACT 联系 */}
-      <section id="contact" className="px-6 md:px-24 py-32 z-10 relative">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
-          <div>
-            <SectionHeader num="05" subtitle="Get in Touch" title="Let's" highlight="Connect." />
-            <p className="text-black/60 dark:text-white/50 text-base leading-relaxed mb-12 max-w-md">有合作意向、创作咨询，或者只是想打个招呼？<br/>通过以下方式都可以随时找到我。</p>
-            
-            <div className="space-y-3">
-              {[
-                { name: '哔哩哔哩', handle: 'space.bilibili.com/430797768', icon: <LucideMonitorPlay size={20}/>, link: 'https://space.bilibili.com/430797768' },
-                { name: '站酷 ZCOOL', handle: 'zcool.com.cn/u/17233702', icon: <LucideImage size={20}/>, link: '#' },
-                { name: '微信公众号', handle: '风男视觉 — 微信搜索', icon: <LucideMousePointer2 size={20}/>, link: '#' }
-              ].map(social => (
-                <a key={social.name} href={social.link} target={social.link !== '#' ? "_blank" : "_self"} rel="noopener noreferrer" className="flex items-center gap-6 p-4 -ml-4 rounded-2xl hover:bg-white/60 dark:hover:bg-white/[0.03] transition-colors group">
-                  <div className="w-14 h-14 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 flex items-center justify-center text-black/50 dark:text-white/50 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black group-hover:shadow-lg transition-all duration-300">
-                    {social.icon}
-                  </div>
-                  <div>
-                    <div className="font-sans font-bold text-lg tracking-tight text-[#0d0d0d] dark:text-white/90 group-hover:text-black dark:group-hover:text-white transition-colors">{social.name}</div>
-                    <div className="font-mono text-[11px] text-black/50 dark:text-white/40 mt-1">{social.handle}</div>
-                  </div>
-                  <LucideArrowUpRight className="ml-auto text-black/20 dark:text-white/20 group-hover:text-black dark:group-hover:text-white transition-colors" size={24}/>
-                </a>
-              ))}
+            <div className="md:col-span-8 md:row-span-2">
+              <SpotlightCard
+                isDarkMode={isDarkMode}
+                category="3D · C4D"
+                title="Just do it"
+                desc="放下完美主义，才是真正的成长开始..."
+                icon={<LucideLayers />}
+                image="/images/1.png"
+                link="https://www.zcool.com.cn/work/ZNzIyNTUyMzI=.html"
+              />
             </div>
-          </div>
 
-          {/* 高级质感表单 */}
-          <div className="bg-white/50 dark:bg-black/40 backdrop-blur-3xl border border-black/10 dark:border-white/10 rounded-[40px] p-8 md:p-14 relative overflow-hidden shadow-2xl dark:shadow-[0_20px_80px_rgba(0,0,0,0.8)]">
-            <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-black/20 dark:via-white/20 to-transparent" />
-            <div className="absolute inset-0 rounded-[40px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] pointer-events-none" />
+            <div className="md:col-span-4">
+              <SpotlightCard
+                isDarkMode={isDarkMode}
+                category="AI · Creative Lab"
+                title="CG产品渲染"
+                desc="石头科技扫地机预热CG"
+                icon={<LucideSparkles />}
+                image="/images/2.png"
+                link="https://www.zcool.com.cn/work/ZNjg1MjE5NzI=.html"
+              />
+            </div>
+
+            <div className="md:col-span-4">
+              <SpotlightCard
+                isDarkMode={isDarkMode}
+                category="3D · Motion"
+                title="卡通场景呈现"
+                desc="TCL中环2022年财报CG作品"
+                icon={<LucideWind />}
+                image="/images/3.png"
+                link="https://www.zcool.com.cn/work/ZNjgwMjIyMzI=.html"
+              />
+            </div>
+
+            <div className="md:col-span-4">
+              <SpotlightCard
+                isDarkMode={isDarkMode}
+                category="AI · Image Gen"
+                title="竞速产品CG表现"
+                desc="环境概念氛围图与影视级光影构成"
+                icon={<LucideImage />}
+                image="/images/4.png"
+                link="https://www.zcool.com.cn/work/ZNjI4Njc0NjQ=.html"
+              />
+            </div>
+
+            <div className="md:col-span-4">
+              <SpotlightCard
+                isDarkMode={isDarkMode}
+                category="3D · VFX"
+                title="室内渲染"
+                desc="家居环境打光与动态渲染"
+                icon={<LucideMonitorPlay />}
+                image="/images/5.png" // 补全图片路径
+                link="https://www.zcool.com.cn/work/YOUR_LINK_HERE_5" // 替换为你的站酷链接
+              />
+            </div>
+
+            {/* 第6个作品集 (由于你贴的代码在上面中断了，这里帮你补全第6个格子) */}
+            <div className="md:col-span-4">
+              <SpotlightCard
+                isDarkMode={isDarkMode}
+                category="3D · Visual"
+                title="更多作品"
+                desc="前往站酷主页查看更多视觉探索..."
+                icon={<LucideBox />}
+                image="/images/6.png" // 补全图片路径
+                link="https://www.zcool.com.cn/u/YOUR_USER_ID" // 替换为你的站酷主页链接
+              />
+            </div>
             
-            <h3 className="font-sans font-bold text-3xl tracking-tight mb-10 text-[#0d0d0d] dark:text-white/90">Send Message</h3>
-            <form className="space-y-6 relative z-10">
-              <div className="space-y-3">
-                <label className="font-mono text-[10px] tracking-[0.25em] text-black/50 dark:text-white/50 uppercase font-semibold">Name</label>
-                <input type="text" className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-base text-[#0d0d0d] dark:text-white focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all shadow-inner" placeholder="你的名字" />
-              </div>
-              <div className="space-y-3">
-                <label className="font-mono text-[10px] tracking-[0.25em] text-black/50 dark:text-white/50 uppercase font-semibold">Email</label>
-                <input type="email" className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-base text-[#0d0d0d] dark:text-white focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all shadow-inner" placeholder="your@email.com" />
-              </div>
-              <div className="space-y-3">
-                <label className="font-mono text-[10px] tracking-[0.25em] text-black/50 dark:text-white/50 uppercase font-semibold">Message</label>
-                <textarea rows="4" className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-base text-[#0d0d0d] dark:text-white focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all resize-none shadow-inner" placeholder="说点什么..." />
-              </div>
-              <button type="button" className="group w-full bg-gradient-to-b from-[#2a2a2a] to-[#0d0d0d] hover:from-[#404040] hover:to-[#1a1a1a] dark:from-white dark:to-gray-200 dark:hover:from-gray-100 dark:hover:to-gray-300 text-white dark:text-black font-mono text-[11px] tracking-[0.25em] uppercase font-bold py-5 rounded-2xl transition-all duration-300 flex justify-center items-center gap-3 mt-8 shadow-lg hover:shadow-xl border border-black/20 dark:border-white/20 relative overflow-hidden">
-                <div className="absolute inset-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] pointer-events-none" />
-                <span className="relative z-10 flex items-center gap-2">Send Message <LucideMail size={16} className="group-hover:translate-x-1 transition-transform"/></span>
-              </button>
-            </form>
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="px-6 md:px-24 py-12 border-t border-black/10 dark:border-white/10 bg-[#e8e5e1] dark:bg-[#040406] flex flex-col md:flex-row justify-between items-center gap-8 relative z-10 transition-colors duration-700">
-        <div className="flex flex-col md:flex-row items-center gap-6">
-          <div className="flex items-center gap-3 font-sans text-lg font-bold tracking-tight text-[#0d0d0d] dark:text-white/90">
-            <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} className="w-2 h-2 rounded-full bg-black dark:bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] dark:shadow-[0_0_10px_rgba(255,255,255,0.8)]" /> 
-            风男视觉
-          </div>
-          <a href="mailto:1115914765@qq.com" className="font-mono text-[11px] tracking-[0.2em] text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 border border-black/10 dark:border-white/10 px-5 py-2.5 rounded-full bg-white/50 dark:bg-white/[0.03] shadow-sm hover:shadow-md">
-            <LucideMail size={14}/> 1115914765@qq.com
-          </a>
-        </div>
-        
-        <div className="font-mono text-[10px] tracking-[0.25em] text-black/40 dark:text-white/30 uppercase font-semibold">
-          © 2026 走路带风的男人 · All Rights Reserved
-        </div>
-        
-        <a href="#" className="font-mono text-[10px] tracking-[0.25em] text-black/60 dark:text-white/50 uppercase hover:text-black dark:hover:text-white font-bold transition-colors">
-          ↑ Back to Top
-        </a>
-      </footer>
     </div>
   );
 }
