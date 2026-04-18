@@ -499,43 +499,80 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px]">
-            <div className="md:col-span-8 md:row-span-2">
-              <SpotlightCard isDarkMode={isDarkMode}
-                category="3D · C4D" title="Just do it" desc="放下完美主义，才是真正的成长开始，后面就是稳稳的改进，持续的坚持，你所有的付出终会潜移默化得给到你反馈。" icon={<LucideLayers/>} 
-                image="/images/1.png"
-              />
-            </div>
-            <div className="md:col-span-4">
-              <SpotlightCard isDarkMode={isDarkMode}
-                category="AI · Creative Lab" title="量子空间" desc="基于多模态大模型的参数化生成艺术" icon={<LucideSparkles/>} 
-                image="/images/2.png"
-              />
-            </div>
-            <div className="md:col-span-4">
-              <SpotlightCard isDarkMode={isDarkMode}
-                category="3D · Motion" title="熔岩地形" desc="流体物理与地形侵蚀动态模拟" icon={<LucideWind/>} 
-                image="/images/3.png"
-              />
-            </div>
-            <div className="md:col-span-4">
-              <SpotlightCard isDarkMode={isDarkMode}
-                category="AI · Image Gen" title="幽境森林" desc="环境概念氛围图与暗调光影重构" icon={<LucideImage/>} 
-                image="/images/4.png"
-              />
-            </div>
-            <div className="md:col-span-4">
-              <SpotlightCard isDarkMode={isDarkMode}
-                category="3D · VFX" title="赛博圣殿" desc="次世代环境与全局光照研究" icon={<LucideMonitorPlay/>} 
-                image="/images/5.png"
-              />
-            </div>
-            <div className="md:col-span-4">
-              <SpotlightCard isDarkMode={isDarkMode}
-                category="AI · ComfyUI" title="GT3 RS CGI" desc="全自动化节点式工作流产出" icon={<LucideCpu/>} 
-                image="/images/6.png"
-              />
-            </div>
-          </div>
+
+  <div className="md:col-span-8 md:row-span-2">
+    <SpotlightCard
+      isDarkMode={isDarkMode}
+      category="3D · C4D"
+      title="Just do it"
+      desc="放下完美主义，才是真正的成长开始..."
+      icon={<LucideLayers />}
+      image="/images/1.png"
+      link="https://www.zcool.com.cn/work/ZNzIyNTUyMzI=.html"
+    />
+  </div>
+
+  <div className="md:col-span-4">
+    <SpotlightCard
+      isDarkMode={isDarkMode}
+      category="AI · Creative Lab"
+      title="CG产品渲染"
+      desc="石头科技扫地机预热CG"
+      icon={<LucideSparkles />}
+      image="/images/2.png"
+      link="https://www.zcool.com.cn/work/ZNjg1MjE5NzI=.html"
+    />
+  </div>
+
+  <div className="md:col-span-4">
+    <SpotlightCard
+      isDarkMode={isDarkMode}
+      category="3D · Motion"
+      title="卡通场景呈现"
+      desc="TCL中环2022年财报CG作品"
+      icon={<LucideWind />}
+      image="/images/3.png"
+      link="https://www.zcool.com.cn/work/ZNjgwMjIyMzI=.html"
+    />
+  </div>
+
+  <div className="md:col-span-4">
+    <SpotlightCard
+      isDarkMode={isDarkMode}
+      category="AI · Image Gen"
+      title="竞速产品CG表现"
+      desc="环境概念氛围图与影视级光影构成"
+      icon={<LucideImage />}
+      image="/images/4.png"
+      link="https://www.zcool.com.cn/work/ZNjI4Njc0NjQ=.html"
+    />
+  </div>
+
+  <div className="md:col-span-4">
+    <SpotlightCard
+      isDarkMode={isDarkMode}
+      category="3D · VFX"
+      title="室内渲染"
+      desc="家居环境打光与动态渲染"
+      icon={<LucideMonitorPlay />}
+      image="/images/5.png"
+      link="https://www.zcool.com.cn/work/ZNjgzMzgwNTI=.html"
+    />
+  </div>
+
+  <div className="md:col-span-4">
+    <SpotlightCard
+      isDarkMode={isDarkMode}
+      category="AI · ComfyUI"
+      title="GT3 RS CGI"
+      desc="汽车外景内饰工作流产出"
+      icon={<LucideCpu />}
+      image="/images/6.png"
+      link="https://www.zcool.com.cn/work/ZNzE3MDUyNzI=.html"
+    />
+  </div>
+
+</div>
         </div>
       </section>
 
