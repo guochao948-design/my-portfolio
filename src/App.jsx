@@ -501,8 +501,8 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px]">
             <div className="md:col-span-8 md:row-span-2">
               <SpotlightCard isDarkMode={isDarkMode}
-                category="3D · C4D" title="星际边界" desc="探索非线性光影在 3D 空间中的折射表现，利用渲染引擎实现极致的色散质感。这是一个关于维度纠缠的视觉实验。" icon={<LucideLayers/>} 
-                image="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=2000&auto=format&fit=crop"
+                category="3D · C4D" title="Just do it" desc="放下完美主义，才是真正的成长开始，后面就是稳稳的改进，持续的坚持，你所有的付出终会潜移默化得给到你反馈。" icon={<LucideLayers/>} 
+                image="/images/1.png"
               />
             </div>
             <div className="md:col-span-4">
