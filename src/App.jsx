@@ -508,31 +508,31 @@ export default function App() {
             <div className="md:col-span-4">
               <SpotlightCard isDarkMode={isDarkMode}
                 category="AI · Creative Lab" title="量子空间" desc="基于多模态大模型的参数化生成艺术" icon={<LucideSparkles/>} 
-                image="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1000&auto=format&fit=crop"
+                image="/images/2.png"
               />
             </div>
             <div className="md:col-span-4">
               <SpotlightCard isDarkMode={isDarkMode}
                 category="3D · Motion" title="熔岩地形" desc="流体物理与地形侵蚀动态模拟" icon={<LucideWind/>} 
-                image="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1000&auto=format&fit=crop"
+                image="/images/3.png"
               />
             </div>
             <div className="md:col-span-4">
               <SpotlightCard isDarkMode={isDarkMode}
                 category="AI · Image Gen" title="幽境森林" desc="环境概念氛围图与暗调光影重构" icon={<LucideImage/>} 
-                image="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop"
+                image="/images/4.png"
               />
             </div>
             <div className="md:col-span-4">
               <SpotlightCard isDarkMode={isDarkMode}
                 category="3D · VFX" title="赛博圣殿" desc="次世代环境与全局光照研究" icon={<LucideMonitorPlay/>} 
-                image="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=1000&auto=format&fit=crop"
+                image="/images/5.png"
               />
             </div>
             <div className="md:col-span-4">
               <SpotlightCard isDarkMode={isDarkMode}
-                category="AI · ComfyUI" title="数字生命" desc="全自动化节点式工作流产出" icon={<LucideCpu/>} 
-                image="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop"
+                category="AI · ComfyUI" title="GT3 RS CGI" desc="全自动化节点式工作流产出" icon={<LucideCpu/>} 
+                image="/images/6.png"
               />
             </div>
           </div>
