@@ -221,12 +221,7 @@ const PremiumHeroGraphics = ({ isDarkMode }) => {
   return (
     <div className="absolute right-0 top-0 w-full md:w-[60%] h-full z-0 pointer-events-none flex items-center justify-center overflow-hidden" style={{ perspective: '1200px' }}>
       
-      {/* 中心环境漫反射光 - 极度克制 */}
-      <motion.div
-        animate={{ opacity: [0.015, 0.03, 0.015], scale: [1, 1.05, 1] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute w-[60vw] h-[60vw] md:w-[600px] md:h-[600px] rounded-full bg-black dark:bg-white blur-[160px]"
-      />
+      
 
       {/* 3D 空间透视同心圆/雷达网格 - Apple 式极简线框 */}
       <motion.div
