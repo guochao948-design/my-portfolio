@@ -308,7 +308,7 @@ export default function App() {
   return (
     <div 
       onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
-      className="min-h-screen bg-[#f4f2f0] dark:bg-[#060608] text-[#0d0d0d] dark:text-white/90 font-sans selection:bg-black/20 dark:selection:bg-white/20 selection:text-black dark:selection:text-white overflow-x-hidden transition-colors duration-700"
+      className="min-h-screen bg-[#fafafa] dark:bg-[#060608] text-[#0d0d0d] dark:text-white/90 font-sans selection:bg-black/20 dark:selection:bg-white/20 selection:text-black dark:selection:text-white overflow-x-hidden transition-colors duration-700"
     >
       <CustomCursor />
 
@@ -319,15 +319,15 @@ export default function App() {
           background: `radial-gradient(circle 800px at ${mousePos.x}px ${mousePos.y}px, ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.04)'} 0%, transparent 100%)`
         }}
       />
-      {/* 细微点阵纹理 */}
+      {/* 细微点阵纹理 - 深色模式保留，浅色模式极淡 */}
       <div className="fixed inset-0 pointer-events-none z-[1]"
-           style={{ backgroundImage: `radial-gradient(circle, ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.07)'} 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
-      {/* SVG 噪点层 */}
-      <div className="fixed inset-0 pointer-events-none z-[2] opacity-[0.04] dark:opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+           style={{ backgroundImage: `radial-gradient(circle, ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.035)'} 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+      {/* SVG 噪点层 - 浅色模式关闭，深色模式保留 */}
+      <div className={`fixed inset-0 pointer-events-none z-[2] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] ${isDarkMode ? 'opacity-[0.03]' : 'opacity-0'}`} />
 
       {/* 导航栏：Apple HIG “灵动”质感 */}
       <nav className={`fixed top-0 w-full z-50 px-6 md:px-24 transition-all duration-500 ease-out ${scrolled ? 'py-4' : 'py-8'}`}>
-        <div className={`w-full flex justify-between items-center transition-all duration-500 ${scrolled ? 'bg-white/60 dark:bg-[#1a1a1c]/60 backdrop-blur-2xl border border-black/5 dark:border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-full px-6 py-3' : ''}`}>
+        <div className={`w-full flex justify-between items-center transition-all duration-500 ${scrolled ? 'bg-white/80 dark:bg-[#1a1a1c]/60 backdrop-blur-2xl border-x border-b border-black/[0.06] dark:border-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.06)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-full px-6 py-3' : ''}`}>
           <div className="flex items-center gap-3 font-sans text-lg font-bold tracking-tight text-[#0d0d0d] dark:text-white/90">
             <motion.div 
               animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
@@ -338,12 +338,12 @@ export default function App() {
           </div>
           <div className="flex items-center">
             {/* 导航按钮 */}
-            <div className="hidden md:flex gap-1 p-1 rounded-full bg-black/[0.03] dark:bg-white/[0.03] border border-black/5 dark:border-white/5 shadow-inner">
+            <div className="hidden md:flex gap-1 p-1 rounded-full bg-black/[0.03] dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.04] shadow-inner">
               {['About', 'Lab', 'Works', 'Downloads', 'Contact'].map(item => (
                 <motion.a 
                   whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                   key={item} href={`#${item.toLowerCase()}`} 
-                  className="px-5 py-2 rounded-full font-sans text-[11px] font-medium tracking-wider uppercase text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white hover:bg-white dark:hover:bg-white/10 shadow-sm hover:shadow-md transition-all"
+                  className="px-5 py-2 rounded-full font-sans text-[11px] font-semibold tracking-wider uppercase text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white hover:bg-white dark:hover:bg-white/10 shadow-sm hover:shadow-md transition-all"
                 >
                   {item}
                 </motion.a>
@@ -682,7 +682,7 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="px-6 md:px-24 py-12 border-t border-black/10 dark:border-white/10 bg-[#e8e5e1] dark:bg-[#040406] flex flex-col md:flex-row justify-between items-center gap-8 relative z-10 transition-colors duration-700">
+      <footer className="px-6 md:px-24 py-12 border-t border-black/10 dark:border-white/10 bg-[#fafafa] dark:bg-[#040406] flex flex-col md:flex-row justify-between items-center gap-8 relative z-10 transition-colors duration-700">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="flex items-center gap-3 font-sans text-lg font-bold tracking-tight text-[#0d0d0d] dark:text-white/90">
             <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} className="w-2 h-2 rounded-full bg-black dark:bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] dark:shadow-[0_0_10px_rgba(255,255,255,0.8)]" /> 
