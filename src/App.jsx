@@ -20,12 +20,12 @@ const SectionHeader = ({ num, title, highlight, subtitle }) => (
       initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
       className="flex items-center gap-4 mb-6"
     >
-      <span className="font-mono text-[10px] tracking-widest text-black/40 dark:text-white/40">{num}</span>
+      <span className="font-sans text-[11px] tracking-widest text-black/40 dark:text-white/40">{num}</span>
       <motion.div 
         initial={{ width: 0 }} whileInView={{ width: 48 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         className="h-[1px] bg-gradient-to-r from-black/20 to-transparent dark:from-white/20 dark:to-transparent" 
       />
-      <span className="font-mono text-[10px] tracking-[0.25em] text-black/60 dark:text-white/60 uppercase">{subtitle}</span>
+      <span className="font-sans text-[11px] tracking-[0.15em] text-black/55 dark:text-white/55 uppercase">{subtitle}</span>
     </motion.div>
     <motion.h2 
       initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
@@ -124,7 +124,7 @@ const SpotlightCard = ({ title, desc, icon, category, tags = [], image = null, l
           <div className={`w-12 h-12 rounded-2xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/10 dark:border-white/10 flex items-center justify-center text-black/70 dark:text-white/70 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black group-hover:scale-110 group-hover:rotate-3 shadow-sm transition-all duration-500`}>
             {icon}
           </div>
-          {category && <span className="font-mono text-[9px] tracking-[0.25em] text-black/40 dark:text-white/40 uppercase font-semibold">{category}</span>}
+          {category && <span className="font-sans text-[10px] tracking-wider text-black/45 dark:text-white/45 uppercase font-medium">{category}</span>}
         </div>
         
         <h3 className="text-xl md:text-2xl font-sans font-semibold tracking-tight mb-4 text-[#0d0d0d] dark:text-white/90 group-hover:text-black dark:group-hover:text-white transition-colors">
@@ -137,7 +137,7 @@ const SpotlightCard = ({ title, desc, icon, category, tags = [], image = null, l
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-8">
             {tags.map(tag => (
-              <span key={tag} className="font-mono text-[9px] tracking-widest px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 text-black/60 dark:text-white/50 bg-black/5 dark:bg-white/[0.03]">
+              <span key={tag} className="font-sans text-[10px] tracking-wider px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10 text-black/55 dark:text-white/50 bg-black/5 dark:bg-white/[0.03]">
                 {tag}
               </span>
             ))}
@@ -319,9 +319,9 @@ export default function App() {
           background: `radial-gradient(circle 800px at ${mousePos.x}px ${mousePos.y}px, ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.04)'} 0%, transparent 100%)`
         }}
       />
-      {/* 细微科技网格纹理 */}
-      <div className="fixed inset-0 pointer-events-none z-[1] opacity-[0.03] dark:opacity-[0.02]" 
-           style={{ backgroundImage: `linear-gradient(${isDarkMode ? 'white' : 'black'} 1px, transparent 1px), linear-gradient(90deg, ${isDarkMode ? 'white' : 'black'} 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+      {/* 细微点阵纹理 */}
+      <div className="fixed inset-0 pointer-events-none z-[1]"
+           style={{ backgroundImage: `radial-gradient(circle, ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.07)'} 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
       {/* SVG 噪点层 */}
       <div className="fixed inset-0 pointer-events-none z-[2] opacity-[0.04] dark:opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
@@ -343,7 +343,7 @@ export default function App() {
                 <motion.a 
                   whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                   key={item} href={`#${item.toLowerCase()}`} 
-                  className="px-5 py-2 rounded-full font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white hover:bg-white dark:hover:bg-white/10 shadow-sm hover:shadow-md transition-all"
+                  className="px-5 py-2 rounded-full font-sans text-[11px] font-medium tracking-wider uppercase text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white hover:bg-white dark:hover:bg-white/10 shadow-sm hover:shadow-md transition-all"
                 >
                   {item}
                 </motion.a>
@@ -370,7 +370,7 @@ export default function App() {
         <div className="max-w-5xl z-10 pointer-events-none">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 mb-8">
             <div className="h-[1px] w-8 bg-black/40 dark:bg-white/40" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-black/70 dark:text-white/70 uppercase font-bold">3D Designer · Indie Developer</span>
+            <span className="font-sans text-[11px] tracking-[0.15em] text-black/65 dark:text-white/65 uppercase font-medium">3D Designer · Indie Developer</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-[5rem] md:text-[8vw] font-sans font-black leading-[0.9] tracking-tighter mb-6 text-[#0d0d0d] dark:text-white pointer-events-auto relative drop-shadow-sm">
             Walk With<br />
@@ -392,7 +392,7 @@ export default function App() {
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="w-[2px] h-12 bg-gradient-to-b from-black/40 dark:from-white/40 to-transparent rounded-full" 
           />
-          <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-black/40 dark:text-white/40 font-semibold">Scroll to explore</span>
+          <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-black/45 dark:text-white/45 font-medium">Scroll to explore</span>
         </motion.div>
       </section>
 
@@ -404,7 +404,7 @@ export default function App() {
           className="flex whitespace-nowrap w-max"
         >
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-16 px-8 font-mono text-[10px] tracking-[0.25em] text-black/50 dark:text-white/40 uppercase font-semibold">
+            <div key={i} className="flex gap-16 px-8 font-sans text-[11px] tracking-widest text-black/55 dark:text-white/45 uppercase font-medium">
               <span className="hover:text-black dark:hover:text-white transition-colors cursor-default">3D Design <em className="text-black/30 dark:text-white/30 ml-4 not-italic">✦</em></span>
               <span className="hover:text-black dark:hover:text-white transition-colors cursor-default">AI Image Gen <em className="text-black/30 dark:text-white/30 ml-4 not-italic">✦</em></span>
               <span className="hover:text-black dark:hover:text-white transition-colors cursor-default">Creative Lab <em className="text-black/30 dark:text-white/30 ml-4 not-italic">✦</em></span>
@@ -434,7 +434,7 @@ export default function App() {
                 className="absolute inset-0 flex flex-col items-center justify-center"
               >
                 <span className="text-7xl mb-6 group-hover:scale-110 transition-transform duration-700 saturate-0 opacity-80 group-hover:opacity-100 drop-shadow-xl">🌬️</span>
-                <span className="font-mono text-[10px] tracking-[0.3em] text-black/60 dark:text-white/60 uppercase font-bold">Creator</span>
+                <span className="font-sans text-[11px] tracking-wider text-black/55 dark:text-white/55 uppercase font-medium">Creator</span>
               </motion.div>
               
               <div className="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-black/20 dark:border-white/20" />
@@ -454,7 +454,7 @@ export default function App() {
             
             <div className="flex flex-wrap gap-3">
               {['3D Modeling', 'AI Image Gen', 'Motion Design', 'Indie Dev', 'C4D', 'ComfyUI', 'AI Dubbing'].map((skill, i) => (
-                <span key={skill} className={`font-mono text-[10px] tracking-widest px-4 py-2 rounded-full border ${i % 2 === 0 ? 'border-black/20 text-black bg-white dark:border-white/20 dark:text-white dark:bg-white/10 shadow-sm font-bold' : 'border-black/10 text-black/60 bg-transparent dark:border-white/10 dark:text-white/50'} transition-all cursor-default hover:-translate-y-0.5 hover:shadow-md`}>
+                <span key={skill} className={`font-sans text-[11px] tracking-wider px-4 py-2 rounded-full border ${i % 2 === 0 ? 'border-black/20 text-black bg-white dark:border-white/20 dark:text-white dark:bg-white/10 shadow-sm font-semibold' : 'border-black/10 text-black/60 bg-transparent dark:border-white/10 dark:text-white/50'} transition-all cursor-default hover:-translate-y-0.5 hover:shadow-md`}>
                   {skill}
                 </span>
               ))}
@@ -503,7 +503,7 @@ export default function App() {
             <SectionHeader num="03" subtitle="Selected Works" title="Featured" highlight="Projects" />
             <div className="text-right hidden md:block pb-4">
               <div className="font-sans font-black text-6xl tracking-tighter text-black/5 dark:text-white/5 mb-2">06</div>
-              <div className="font-mono text-[9px] tracking-[0.25em] text-black/40 dark:text-white/30 uppercase font-semibold">Curated Case Studies</div>
+              <div className="font-sans text-[11px] tracking-wider text-black/40 dark:text-white/35 uppercase">Curated Case Studies</div>
             </div>
           </div>
 
@@ -609,13 +609,13 @@ export default function App() {
                 
                 <div className="relative z-10 flex justify-between items-start mb-8">
                   <div className="text-black/50 dark:text-white/50 group-hover:text-black dark:group-hover:text-white transition-colors">{item.i}</div>
-                  <span className="text-[9px] font-mono border border-black/10 dark:border-white/10 text-black/80 dark:text-white/80 px-2 py-1 rounded bg-black/5 dark:bg-white/5 font-bold shadow-sm">FREE</span>
+                  <span className="text-[9px] font-sans border border-black/10 dark:border-white/10 text-black/70 dark:text-white/70 px-2 py-1 rounded bg-black/5 dark:bg-white/5 font-bold shadow-sm tracking-wider">FREE</span>
                 </div>
                 <h4 className="relative z-10 font-sans font-bold text-lg mb-3 text-[#0d0d0d] dark:text-white/90 group-hover:text-black dark:group-hover:text-white transition-colors">{item.t}</h4>
                 <p className="relative z-10 text-sm text-black/60 dark:text-white/50 leading-relaxed flex-grow mb-8">{item.d}</p>
                 <div className="relative z-10 flex justify-between items-center pt-5 border-t border-black/10 dark:border-white/10">
-                  <span className="font-mono text-[10px] text-black/40 dark:text-white/40 font-semibold">{item.s}</span>
-                  <span className="font-mono text-[10px] text-black/60 dark:text-white/60 tracking-widest uppercase flex items-center gap-1 group-hover:gap-2 group-hover:text-black dark:group-hover:text-white transition-all font-bold">
+                  <span className="font-sans text-[11px] text-black/45 dark:text-white/40 font-medium">{item.s}</span>
+                  <span className="font-sans text-[11px] text-black/55 dark:text-white/55 tracking-wider uppercase flex items-center gap-1 group-hover:gap-2 group-hover:text-black dark:group-hover:text-white transition-all font-semibold">
                     Get <LucideArrowUpRight size={14}/>
                   </span>
                 </div>
@@ -645,7 +645,7 @@ export default function App() {
                   </div>
                   <div>
                     <div className="font-sans font-bold text-lg tracking-tight text-[#0d0d0d] dark:text-white/90 group-hover:text-black dark:group-hover:text-white transition-colors">{social.name}</div>
-                    <div className="font-mono text-[11px] text-black/50 dark:text-white/40 mt-1">{social.handle}</div>
+                    <div className="font-sans text-[11px] text-black/50 dark:text-white/40 mt-1">{social.handle}</div>
                   </div>
                   <LucideArrowUpRight className="ml-auto text-black/20 dark:text-white/20 group-hover:text-black dark:group-hover:text-white transition-colors" size={24}/>
                 </a>
@@ -661,18 +661,18 @@ export default function App() {
             <h3 className="font-sans font-bold text-3xl tracking-tight mb-10 text-[#0d0d0d] dark:text-white/90">Send Message</h3>
             <form className="space-y-6 relative z-10">
               <div className="space-y-3">
-                <label className="font-mono text-[10px] tracking-[0.25em] text-black/50 dark:text-white/50 uppercase font-semibold">Name</label>
+                <label className="font-sans text-[11px] tracking-[0.15em] text-black/50 dark:text-white/50 uppercase font-medium">Name</label>
                 <input type="text" className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-base text-[#0d0d0d] dark:text-white focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all shadow-inner" placeholder="你的名字" />
               </div>
               <div className="space-y-3">
-                <label className="font-mono text-[10px] tracking-[0.25em] text-black/50 dark:text-white/50 uppercase font-semibold">Email</label>
+                <label className="font-sans text-[11px] tracking-[0.15em] text-black/50 dark:text-white/50 uppercase font-medium">Email</label>
                 <input type="email" className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-base text-[#0d0d0d] dark:text-white focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all shadow-inner" placeholder="your@email.com" />
               </div>
               <div className="space-y-3">
-                <label className="font-mono text-[10px] tracking-[0.25em] text-black/50 dark:text-white/50 uppercase font-semibold">Message</label>
+                <label className="font-sans text-[11px] tracking-[0.15em] text-black/50 dark:text-white/50 uppercase font-medium">Message</label>
                 <textarea rows="4" className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl px-5 py-4 text-base text-[#0d0d0d] dark:text-white focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all resize-none shadow-inner" placeholder="说点什么..." />
               </div>
-              <button type="button" className="group w-full bg-gradient-to-b from-[#2a2a2a] to-[#0d0d0d] hover:from-[#404040] hover:to-[#1a1a1a] dark:from-white dark:to-gray-200 dark:hover:from-gray-100 dark:hover:to-gray-300 text-white dark:text-black font-mono text-[11px] tracking-[0.25em] uppercase font-bold py-5 rounded-2xl transition-all duration-300 flex justify-center items-center gap-3 mt-8 shadow-lg hover:shadow-xl border border-black/20 dark:border-white/20 relative overflow-hidden">
+              <button type="button" className="group w-full bg-gradient-to-b from-[#2a2a2a] to-[#0d0d0d] hover:from-[#404040] hover:to-[#1a1a1a] dark:from-white dark:to-gray-200 dark:hover:from-gray-100 dark:hover:to-gray-300 text-white dark:text-black font-sans text-[12px] tracking-[0.15em] uppercase font-semibold py-5 rounded-2xl transition-all duration-300 flex justify-center items-center gap-3 mt-8 shadow-lg hover:shadow-xl border border-black/20 dark:border-white/20 relative overflow-hidden">
                 <div className="absolute inset-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] pointer-events-none" />
                 <span className="relative z-10 flex items-center gap-2">Send Message <LucideMail size={16} className="group-hover:translate-x-1 transition-transform"/></span>
               </button>
@@ -688,16 +688,16 @@ export default function App() {
             <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} className="w-2 h-2 rounded-full bg-black dark:bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] dark:shadow-[0_0_10px_rgba(255,255,255,0.8)]" /> 
             风男视觉
           </div>
-          <a href="mailto:1115914765@qq.com" className="font-mono text-[11px] tracking-[0.2em] text-black/60 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 border border-black/10 dark:border-white/10 px-5 py-2.5 rounded-full bg-white/50 dark:bg-white/[0.03] shadow-sm hover:shadow-md">
+          <a href="mailto:1115914765@qq.com" className="font-sans text-[12px] tracking-wide text-black/55 dark:text-white/45 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 border border-black/10 dark:border-white/10 px-5 py-2.5 rounded-full bg-white/50 dark:bg-white/[0.03] shadow-sm hover:shadow-md">
             <LucideMail size={14}/> 1115914765@qq.com
           </a>
         </div>
         
-        <div className="font-mono text-[10px] tracking-[0.25em] text-black/40 dark:text-white/30 uppercase font-semibold">
+        <div className="font-sans text-[12px] tracking-wide text-black/50 dark:text-white/40">
           © 2026 走路带风的男人 · All Rights Reserved
         </div>
         
-        <a href="#" className="font-mono text-[10px] tracking-[0.25em] text-black/60 dark:text-white/50 uppercase hover:text-black dark:hover:text-white font-bold transition-colors">
+        <a href="#" className="font-sans text-[12px] tracking-wider text-black/50 dark:text-white/40 uppercase hover:text-black dark:hover:text-white transition-colors">
           ↑ Back to Top
         </a>
       </footer>
