@@ -219,7 +219,7 @@ const PenWritingEffect = ({ isDarkMode }) => {
 // 🌟 重构：极致高级感 3D 悬浮阵列与透视网格
 const PremiumHeroGraphics = ({ isDarkMode }) => {
   return (
-    <div className="absolute right-0 top-0 w-full md:w-[60%] h-full z-0 pointer-events-none flex items-center justify-center overflow-hidden" style={{ perspective: '1200px' }}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }} className="absolute right-0 top-0 w-full md:w-[60%] h-full z-0 pointer-events-none flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
       
       
 
@@ -277,7 +277,7 @@ const PremiumHeroGraphics = ({ isDarkMode }) => {
       </motion.div>
 
       <PenWritingEffect isDarkMode={isDarkMode} />
-    </div>
+    </motion.div>
   );
 };
 
@@ -354,11 +354,11 @@ export default function App() {
         <PremiumHeroGraphics isDarkMode={isDarkMode} />
 
         <div className="max-w-5xl z-10 pointer-events-none">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 mb-8">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-4 mb-8">
             <div className="h-[1px] w-8 bg-black/40 dark:bg-white/40" />
             <span className="font-sans text-[11px] tracking-[0.15em] text-black/65 dark:text-white/65 uppercase font-medium">3D Designer · Indie Developer</span>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-[5rem] md:text-[8vw] font-sans font-black leading-[0.9] tracking-tighter mb-6 text-[#0d0d0d] dark:text-white pointer-events-auto relative drop-shadow-sm">
+          <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[5rem] md:text-[8vw] font-sans font-black leading-[0.9] tracking-tighter mb-6 text-[#0d0d0d] dark:text-white pointer-events-auto relative drop-shadow-sm">
             Walk With<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#0d0d0d] to-black/30 dark:from-white dark:to-white/40">the Wind.</span>
           </motion.h1>
