@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   LucideLayers, LucideCpu, LucideWind, LucideArrowUpRight, 
@@ -235,9 +235,9 @@ const PremiumHeroGraphics = ({ isDarkMode }) => {
         className="absolute flex items-center justify-center"
         style={{ transform: 'rotateX(65deg) translateY(100px)', transformStyle: 'preserve-3d' }}
       >
-        <div className="absolute w-[90vw] h-[90vw] md:w-[900px] md:h-[900px] rounded-full border border-black/[0.03] dark:border-white/[0.03]" />
-        <div className="absolute w-[65vw] h-[65vw] md:w-[650px] md:h-[650px] rounded-full border border-black/[0.05] border-t-black/10 dark:border-white/[0.05] dark:border-t-white/10 shadow-[inset_0_0_40px_rgba(0,0,0,0.02)] dark:shadow-[inset_0_0_40px_rgba(255,255,255,0.02)]" />
-        <div className="absolute w-[40vw] h-[40vw] md:w-[400px] md:h-[400px] rounded-full border border-dashed border-black/[0.05] dark:border-white/[0.05]" />
+        <div className="absolute w-[90vw] h-[90vw] md:w-[900px] md:h-[900px] rounded-full border border-black/[0.015] dark:border-white/[0.015]" />
+        <div className="absolute w-[65vw] h-[65vw] md:w-[650px] md:h-[650px] rounded-full border border-black/[0.02] border-t-black/[0.03] dark:border-white/[0.02] dark:border-t-white/[0.04] shadow-[inset_0_0_40px_rgba(0,0,0,0.01)] dark:shadow-[inset_0_0_40px_rgba(255,255,255,0.01)]" />
+        <div className="absolute w-[40vw] h-[40vw] md:w-[400px] md:h-[400px] rounded-full border border-dashed border-black/[0.015] dark:border-white/[0.015]" />
       </motion.div>
 
       {/* 空间悬浮粒子 */}
@@ -290,11 +290,10 @@ const PremiumHeroGraphics = ({ isDarkMode }) => {
 // --- 页面主体 ---
 
 export default function App() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [scrolled, setScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isDarkMode) document.documentElement.classList.add('dark');
     else document.documentElement.classList.remove('dark');
   }, [isDarkMode]);
@@ -307,19 +306,11 @@ export default function App() {
 
   return (
     <div 
-      onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
       className="min-h-screen bg-[#fafafa] dark:bg-[#060608] text-[#0d0d0d] dark:text-white/90 font-sans selection:bg-black/20 dark:selection:bg-white/20 selection:text-black dark:selection:text-white overflow-x-hidden transition-colors duration-700"
     >
       <CustomCursor />
 
-      {/* 🚀 提升：全局背景系统 (Mica 基础 + 透视网格 + 噪点) */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0 opacity-50 dark:opacity-40 transition-colors duration-700"
-        style={{
-          background: `radial-gradient(circle 800px at ${mousePos.x}px ${mousePos.y}px, ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.04)'} 0%, transparent 100%)`
-        }}
-      />
-      {/* 细微点阵纹理 - 深色模式保留，浅色模式极淡 */}
+      {/* 细微点阵纹理 - 静态，不跟鼠标交互 */}
       <div className="fixed inset-0 pointer-events-none z-[1]"
            style={{ backgroundImage: `radial-gradient(circle, ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.035)'} 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
       {/* SVG 噪点层 - 浅色模式关闭，深色模式保留 */}
