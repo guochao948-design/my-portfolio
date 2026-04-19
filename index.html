@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
-    
+
+    <!-- 防止进入时闪白：在任何资源加载前立即设置深色背景 -->
+    <style>html, body { background-color: #060608; }</style>
+    <script>document.documentElement.classList.add('dark')</script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -12,7 +16,6 @@
         darkMode: 'class',
       }
     </script>
-
   </head>
   <body>
     <div id="root"></div>
