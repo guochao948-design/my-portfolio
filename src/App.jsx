@@ -111,8 +111,8 @@ const SpotlightCard = ({ title, desc, icon, category, tags = [], image = null, l
 
       {image && (
         <div className="absolute inset-0 z-[5] overflow-hidden">
-          <img src={image} alt={title} className="w-full h-full object-cover opacity-[0.25] dark:opacity-40 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-out mix-blend-luminosity group-hover:mix-blend-normal saturate-50 group-hover:saturate-100" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f0ede8] via-[#f0ede8]/80 dark:from-[#060608] dark:via-[#060608]/80 to-transparent" />
+          <img src={image} alt={title} className="w-full h-full object-cover opacity-80 dark:opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out mix-blend-normal saturate-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#f0ede8]/90 via-[#f0ede8]/30 dark:from-[#060608]/90 dark:via-[#060608]/30 to-transparent" />
         </div>
       )}
 
