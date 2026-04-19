@@ -311,14 +311,14 @@ export default function App() {
       <CustomCursor />
 
       {/* 细微点阵纹理 - 静态，不跟鼠标交互 */}
-      <div className="fixed inset-0 pointer-events-none z-[1]"
-           style={{ backgroundImage: `radial-gradient(circle, ${isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.035)'} 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+      <div className="fixed inset-0 pointer-events-none z-0"
+           style={{ backgroundImage: `radial-gradient(circle, ${isDarkMode ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.025)'} 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
       {/* SVG 噪点层 - 浅色模式关闭，深色模式保留 */}
       <div className={`fixed inset-0 pointer-events-none z-[2] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] ${isDarkMode ? 'opacity-[0.03]' : 'opacity-0'}`} />
 
       {/* 导航栏：Apple HIG “灵动”质感 */}
       <nav className={`fixed top-0 w-full z-50 px-6 md:px-24 transition-all duration-500 ease-out ${scrolled ? 'py-4' : 'py-8'}`}>
-        <div className={`w-full flex justify-between items-center transition-all duration-500 ${scrolled ? 'bg-white/80 dark:bg-[#1a1a1c]/60 backdrop-blur-2xl border-x border-b border-black/[0.06] dark:border-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.06)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.3)] rounded-full px-6 py-3' : ''}`}>
+        <div className={`w-full flex justify-between items-center transition-all duration-500 rounded-full px-6 py-3 border-x border-b ${scrolled ? 'bg-white/80 dark:bg-[#1a1a1c]/60 backdrop-blur-2xl border-black/[0.06] dark:border-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.06)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.3)]' : 'border-transparent bg-transparent backdrop-blur-none shadow-none'}`}>
           <div className="flex items-center gap-3 font-sans text-lg font-bold tracking-tight text-[#0d0d0d] dark:text-white/90">
             <motion.div 
               animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
