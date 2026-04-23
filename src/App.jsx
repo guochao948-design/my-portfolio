@@ -170,47 +170,48 @@ const CustomCursor = () => {
 const PenWritingEffect = ({ isDarkMode }) => {
   return (
     <motion.div
-      animate={{ y: [-8, 8, -8], rotateX: [5, -5, 5], rotateZ: [-2, 2, -2] }}
-      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      className="absolute w-64 h-16 rounded-[20px] bg-white/20 dark:bg-[#1a1a1a]/40 backdrop-blur-3xl border border-black/10 dark:border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.3)] translate-x-20 translate-y-40 md:translate-x-32 md:translate-y-52 flex items-center justify-center z-30"
-      style={{ transformStyle: 'preserve-3d' }}
+      animate={{ y: [-6, 6, -6], rotateZ: [-1.4, 1.2, -1.4] }}
+      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+      className="absolute z-30"
+      style={{
+        left: '55%',
+        top: '51%',
+        transform: 'translate(-50%, -50%)'
+      }}
     >
-      <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-black/20 dark:via-white/20 to-transparent opacity-50" />
-      <div className="absolute inset-0 rounded-[20px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] pointer-events-none" />
+      <div className="relative w-[180px] h-[120px] md:w-[240px] md:h-[160px] rounded-[28px] border border-white/12 bg-white/[0.015] backdrop-blur-[14px] shadow-[0_0_30px_rgba(255,255,255,0.04),inset_0_1px_0_rgba(255,255,255,0.18)]">
+        <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-white/[0.04] via-transparent to-transparent pointer-events-none" />
 
-      <div className="relative w-[150px] h-6 flex items-center">
-        <motion.div
-          animate={{ clipPath: ["inset(0 100% 0 0)", "inset(0 0% 0 0)", "inset(0 0% 0 0)", "inset(0 100% 0 0)", "inset(0 100% 0 0)"] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", times: [0, 0.4, 0.6, 0.8, 1] }}
-          className="absolute inset-0 flex items-center font-serif italic text-sm text-transparent bg-clip-text bg-gradient-to-r from-[#0d0d0d] to-black/50 dark:from-white/90 dark:to-white/40 tracking-widest"
-        >
-          走路带风，随心而动
-        </motion.div>
-        
-        <motion.div
-          animate={{ left: ["0%", "100%", "100%", "0%", "0%"], opacity: [0, 1, 1, 0, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", times: [0, 0.4, 0.6, 0.8, 1] }}
-          className="absolute top-0 bottom-0 flex items-center justify-center -ml-2"
-        >
-          <LucidePenTool size={14} className="text-black/80 dark:text-white/80 drop-shadow-md" />
-          <div className="absolute top-1/2 left-1/2 w-1.5 h-1.5 bg-[#0d0d0d] dark:bg-white rounded-full blur-[2px]" />
-        </motion.div>
+        <div className="absolute left-[24%] top-[33%] -translate-x-1/2 -translate-y-1/2 font-serif italic text-[13px] md:text-[17px] tracking-[0.08em] text-white/90 whitespace-nowrap">
+          走路带风，
+        </div>
 
-        <svg width="150" height="10" viewBox="0 0 150 10" className="absolute -bottom-2 left-0 overflow-visible opacity-40 dark:opacity-60">
-          <motion.path
-            d="M 0,5 Q 40,0 80,5 T 150,2" fill="transparent" stroke="url(#gradient-line)" strokeWidth="1.5" strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 1, 0, 0], opacity: [0, 1, 1, 0, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", times: [0, 0.4, 0.6, 0.8, 1] }}
-          />
-          <defs>
-            <linearGradient id="gradient-line" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="rgba(0,0,0,0)" />
-              <stop offset="50%" stopColor={isDarkMode ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)"} />
-              <stop offset="100%" stopColor="rgba(0,0,0,0)" />
-            </linearGradient>
-          </defs>
-        </svg>
+        <div className="absolute left-[61%] top-[59%] -translate-x-1/2 -translate-y-1/2 font-serif italic text-[15px] md:text-[22px] tracking-[0.10em] text-white/90 whitespace-nowrap">
+          随 心而动
+        </div>
+
+        <div className="absolute right-[16%] bottom-[13%] w-[44px] md:w-[60px] opacity-80">
+          <svg viewBox="0 0 84 26" fill="none" className="w-full h-auto">
+            <motion.path
+              d="M4 19C17 13 25 9 36 16C44 21 44 21 49 8C51 3 58 3 61 10C64 18 69 18 79 13"
+              stroke={isDarkMode ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.75)"}
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", times: [0, 0.42, 0.72, 1] }}
+            />
+          </svg>
+        </div>
+
+        <motion.div
+          animate={{ x: [0, 44, 44, 0], y: [0, -2, -2, 0], opacity: [0, 1, 1, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", times: [0, 0.42, 0.72, 1] }}
+          className="absolute right-[12%] top-[39%]"
+        >
+          <LucidePenTool size={12} className="text-white/80 drop-shadow-[0_0_8px_rgba(255,255,255,0.25)] md:w-[14px] md:h-[14px]" />
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -219,64 +220,72 @@ const PenWritingEffect = ({ isDarkMode }) => {
 // 🌟 重构：极致高级感 3D 悬浮阵列与透视网格
 const PremiumHeroGraphics = ({ isDarkMode }) => {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }} className="absolute right-0 top-0 w-full md:w-[60%] h-full z-0 pointer-events-none flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
-      
-      
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+      className="absolute right-0 top-0 w-full md:w-[58%] h-full z-0 pointer-events-none flex items-center justify-center overflow-hidden"
+      style={{ perspective: "1400px" }}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(255,255,255,0.18),transparent_22%),radial-gradient(circle_at_76%_54%,rgba(255,255,255,0.06),transparent_30%)]" />
 
-      {/* 3D 空间透视同心圆/雷达网格 - Apple 式极简线框 */}
       <motion.div
         animate={{ rotateZ: 360 }}
-        transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 220, repeat: Infinity, ease: "linear" }}
         className="absolute flex items-center justify-center"
-        style={{ transform: 'rotateX(65deg) translateY(100px)', transformStyle: 'preserve-3d' }}
+        style={{ transform: 'rotateX(66deg) translateY(120px)', transformStyle: 'preserve-3d' }}
       >
-        <div className="absolute w-[90vw] h-[90vw] md:w-[900px] md:h-[900px] rounded-full border border-black/[0.015] dark:border-white/[0.015]" />
-        <div className="absolute w-[65vw] h-[65vw] md:w-[650px] md:h-[650px] rounded-full border border-black/[0.02] border-t-black/[0.03] dark:border-white/[0.02] dark:border-t-white/[0.04] shadow-[inset_0_0_40px_rgba(0,0,0,0.01)] dark:shadow-[inset_0_0_40px_rgba(255,255,255,0.01)]" />
-        <div className="absolute w-[40vw] h-[40vw] md:w-[400px] md:h-[400px] rounded-full border border-dashed border-black/[0.015] dark:border-white/[0.015]" />
+        <div className="absolute w-[86vw] h-[86vw] md:w-[820px] md:h-[820px] rounded-full border border-white/[0.035]" />
+        <div className="absolute w-[62vw] h-[62vw] md:w-[580px] md:h-[580px] rounded-full border border-white/[0.03]" />
+        <div className="absolute w-[40vw] h-[40vw] md:w-[380px] md:h-[380px] rounded-full border border-white/[0.02]" />
       </motion.div>
 
-      {/* 空间悬浮粒子 */}
-      {[...Array(8)].map((_, i) => (
+      {[...Array(5)].map((_, i) => (
         <motion.div
           key={`particle-${i}`}
-          animate={{ y: [0, -120], opacity: [0, 0.8, 0], scale: [0.5, 1.2, 0.5] }}
-          transition={{ duration: 6 + Math.random() * 6, repeat: Infinity, ease: "linear", delay: Math.random() * 5 }}
-          className="absolute w-[2px] h-[2px] bg-black dark:bg-white rounded-full blur-[0.5px]"
-          style={{ 
-            left: `${20 + Math.random() * 60}%`, top: `${40 + Math.random() * 30}%`,
-            transformStyle: 'preserve-3d', transform: `translateZ(${Math.random() * 200 - 100}px)`
-          }}
+          animate={{ y: [0, -70], opacity: [0, 0.55, 0], scale: [0.7, 1.05, 0.7] }}
+          transition={{ duration: 7 + i, repeat: Infinity, ease: "linear", delay: i * 0.8 }}
+          className="absolute w-[2px] h-[2px] bg-white/75 rounded-full blur-[0.4px]"
+          style={{ left: `${55 + i * 7}%`, top: `${24 + i * 9}%` }}
         />
       ))}
 
-      {/* 悬浮 Mica 主板 */}
-      <motion.div
-        animate={{ y: [-10, 10, -10], rotateX: [12, 16, 12], rotateZ: [-4, -1, -4] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute w-48 h-64 md:w-64 md:h-80 rounded-[32px] bg-white/30 dark:bg-white/[0.02] backdrop-blur-3xl border border-black/10 dark:border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] translate-x-12 -translate-y-12 flex flex-col justify-between p-6 z-10"
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        <div className="absolute inset-0 rounded-[32px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.5)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] pointer-events-none" />
-        <div className="w-10 h-10 rounded-2xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 flex items-center justify-center text-black/60 dark:text-white/60 shadow-sm"><LucideLayers size={16}/></div>
-        <div className="space-y-3">
-          <div className="h-1.5 w-16 bg-gradient-to-r from-black/30 to-black/10 dark:from-white/30 dark:to-white/10 rounded-full" />
-          <div className="h-1 w-10 bg-black/10 dark:bg-white/10 rounded-full" />
-        </div>
-      </motion.div>
+      <div className="absolute right-[8%] md:right-[10%] top-[22%] md:top-[20%] w-[330px] h-[430px] md:w-[470px] md:h-[580px]" style={{ transformStyle: 'preserve-3d' }}>
+        <div className="absolute inset-x-[12%] bottom-[-7%] h-[36px] md:h-[46px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.38),rgba(255,255,255,0.05)_48%,transparent_70%)] blur-xl opacity-80" />
 
-      {/* 悬浮侧板 */}
-      <motion.div
-        animate={{ y: [12, -12, 12], rotateY: [-12, -6, -12], rotateZ: [4, 7, 4] }}
-        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute w-32 h-40 md:w-48 md:h-56 rounded-[24px] bg-gradient-to-tr from-white/10 to-white/40 dark:from-white/[0.01] dark:to-white/[0.04] backdrop-blur-2xl border border-black/10 dark:border-white/10 shadow-2xl -translate-x-32 translate-y-24 flex items-end p-5 z-20 overflow-hidden"
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-         <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.5)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] pointer-events-none" />
-         <motion.div animate={{ x: ['-200%', '200%'] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent -skew-x-12 z-0" />
-         <div className="h-1 w-full bg-gradient-to-r from-transparent via-black/20 dark:via-white/20 to-transparent rounded-full z-10" />
-      </motion.div>
+        <motion.div
+          animate={{ y: [-8, 8, -8], rotateZ: [-3.2, -1.6, -3.2] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-[20%] top-[6%] w-[66%] h-[74%] rounded-[30px] border border-white/20 bg-white/[0.02] backdrop-blur-[10px] shadow-[0_0_28px_rgba(255,255,255,0.05),inset_0_1px_0_rgba(255,255,255,0.20)]"
+        />
 
-      <PenWritingEffect isDarkMode={isDarkMode} />
+        <motion.div
+          animate={{ y: [8, -8, 8], rotateZ: [7, 4.5, 7] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-[33%] top-[18%] w-[50%] h-[56%] rounded-[28px] border border-white/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.015))] backdrop-blur-[12px] shadow-[0_0_24px_rgba(255,255,255,0.04),inset_0_1px_0_rgba(255,255,255,0.14)]"
+        />
+
+        <motion.div
+          animate={{ y: [-10, 10, -10], rotateZ: [-1.4, 1.4, -1.4] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-[6%] top-[20%] w-[72px] h-[72px] md:w-[92px] md:h-[92px] rounded-[22px] border border-white/18 bg-white/[0.04] backdrop-blur-[12px] shadow-[0_0_18px_rgba(255,255,255,0.05),inset_0_1px_0_rgba(255,255,255,0.16)] flex items-center justify-center z-20"
+        >
+          <LucideBox size={24} className="text-white/85 md:w-[28px] md:h-[28px]" />
+        </motion.div>
+
+        <motion.div
+          animate={{ y: [10, -10, 10], rotateZ: [1.8, -1.2, 1.8] }}
+          transition={{ duration: 10.5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute right-[2%] bottom-[10%] w-[74px] h-[74px] md:w-[96px] md:h-[96px] rounded-[22px] border border-white/18 bg-white/[0.04] backdrop-blur-[12px] shadow-[0_0_18px_rgba(255,255,255,0.05),inset_0_1px_0_rgba(255,255,255,0.16)] z-20 flex items-center justify-center"
+        >
+          <div className="flex flex-col gap-2 md:gap-3">
+            <div className="w-8 md:w-10 h-[5px] rounded-full bg-white/90" />
+            <div className="w-8 md:w-10 h-[5px] rounded-full bg-white/72" />
+          </div>
+        </motion.div>
+
+        <PenWritingEffect isDarkMode={isDarkMode} />
+      </div>
     </motion.div>
   );
 };
@@ -359,16 +368,25 @@ export default function App() {
             <span className="font-sans text-[11px] tracking-[0.15em] text-black/65 dark:text-white/65 uppercase font-medium">3D Designer · Indie Developer</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[5rem] md:text-[8vw] font-sans font-black leading-[0.9] tracking-tighter mb-6 text-[#0d0d0d] dark:text-white pointer-events-auto relative drop-shadow-sm">
-            Walk With<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#0d0d0d] to-black/30 dark:from-white dark:to-white/40">the Wind.</span>
+            风男视觉
           </motion.h1>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-xl md:text-3xl font-light text-black/60 dark:text-white/50 tracking-[0.1em] mb-8">
-            走路带风的男人
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-[2rem] md:text-[3.2rem] font-light text-black/60 dark:text-white/55 tracking-tight mb-8 leading-none">
+            3D, Motion and AI-driven Creative Systems
           </motion.div>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="max-w-md text-black/60 dark:text-white/50 text-sm md:text-base leading-relaxed font-normal mb-12 pointer-events-auto">
-            用 3D 视觉与 AI 技术构建下一代创作体验。<br/>
-            Creative Lab 创始人，集成三大引擎的 AI 绘图工具。
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="max-w-xl text-black/60 dark:text-white/50 text-sm md:text-base leading-relaxed font-normal mb-12 pointer-events-auto">
+            聚焦 3D 视觉、动态影像与 AI 创作工具，<br/>
+            以系统化设计语言构建下一代创作体验。
           </motion.p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.38 }} className="flex gap-4 pointer-events-auto">
+            <a href="#works" className="inline-flex items-center gap-3 px-8 py-4 rounded-[22px] bg-white text-black text-lg shadow-[0_10px_30px_rgba(255,255,255,0.08)] border border-white/70 hover:translate-y-[-2px] transition-all">
+              <span>View Works</span>
+              <LucideArrowUpRight size={18} />
+            </a>
+            <a href="#lab" className="inline-flex items-center gap-3 px-8 py-4 rounded-[22px] border border-white/15 bg-white/[0.02] text-white/90 backdrop-blur-xl text-lg hover:border-white/25 hover:translate-y-[-2px] transition-all">
+              <span>Creative Lab</span>
+              <LucidePenTool size={18} />
+            </a>
+          </motion.div>
         </div>
         
         {/* Scroll Indicator */}
